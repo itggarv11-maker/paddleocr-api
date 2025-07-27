@@ -1,12 +1,11 @@
 from fastapi import FastAPI, UploadFile, File
-from fastapi.responses import JSONResponse
-import cv2
-import numpy as np
-import paddleocr
+from paddleocr import PaddleOCR
+import shutil
 
 app = FastAPI()
 
-ocr = paddleocr.OCR(use_angle_cls=True, lang='en')  # Set lang='en' or 'en+hindi'
+ocr = PaddleOCR(use_angle_cls=True, lang='en')
+
 
 def read_image(image_bytes: bytes) -> np.ndarray:
     nparr = np.frombuffer(image_bytes, np.uint8)
